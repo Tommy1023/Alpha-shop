@@ -1,0 +1,24 @@
+.steps svg {
+  margin-right: 0.5em;
+  color: white;
+  background-color: #b8b6b6;
+  border-radius: 50%;
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.step.active svg {
+  background-color: black;
+}
+.step.active hr {
+  border: 1px solid black;
+}
+
+.steps div {
+  width: 20%;
+}
+
+.steps hr {
+  width: 40%;
+  border: 1px solid #b8b6b6;
+}

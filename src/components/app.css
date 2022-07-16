@@ -1,17 +1,3 @@
-/* for dev */
-.red {
-  outline: 2px solid red;
+footer {
+  background-color: gray;
 }
-.blue {
-  outline: 2px solid blue;
-}
-.green {
-  outline: 2px solid green;
-}
-.orange {
-  outline: 2px solid orange;
-}
-.brown {
-  outline: 2px solid brown;
-}
-/* for dev */
