@@ -1,11 +1,15 @@
 .btn {
-  width: 11rem;
   height: 2.8rem;
   border-radius: 8px;
   color: black;
   background-color: #FFFFFF;
 }
-.right {
+.next {
   color: #FFFFFF;
   background-color: #F67599;
+}
+
+.btn[data-btnOff=true] {
+  /* display: none; */
+  visibility: hidden;
 }

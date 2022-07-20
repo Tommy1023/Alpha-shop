@@ -11,3 +11,24 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* for dev */
+.cr {
+  outline: 3px solid red;
+}
+
+.cg {
+  outline: 3px solid green;
+}
+
+.cb {
+  outline: 3px solid blue
+}
+
+.co {
+  outline: 3px solid orange;
+}
+
+.cd {
+  outline: 3px solid black;
+}

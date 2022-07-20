@@ -1,30 +1,50 @@
-import './stepProgress.css';
+import './style.css';
+import React from 'react';
 import { RiNumber1, RiNumber2, RiNumber3 } from 'react-icons/ri';
+import { AiFillCheckCircle } from 'react-icons/ai';
 
-const StepProgress = () => {
+// flow.js 定義props型別
+type FunctionalStepProps = {
+  step: Number,
+};
+
+const StepProgress: React.FC<FunctionalStepProps> = (props) => {
+  const { step } = props;
   return (
-    <div className="row">
-      <div className="mt-3">
-        <h2 className="tittle my-5">結帳</h2>
-        <div className="steps d-flex justify-content-start">
-          <div className="step d-flex align-items-center active">
-            <RiNumber1 />
-            <span>寄送地址</span>
-            <hr className="mx-2" />
-          </div>
-          <div className="step d-flex align-items-center">
-            <RiNumber2 />
-            <span>運送方式</span>
-            <hr className="mx-2" />
-          </div>
-          <div className="step d-flex align-items-center">
-            <RiNumber3 />
-            <span>付款資訊</span>
-            <hr className="mx-2" />
-          </div>
+    <>
+      {/* tittle */}
+      <h2 className="tittle my-5">結帳</h2>
+      {/* Wizard-bar */}
+      <div className="wizard d-flex justify-content-start">
+        {/* step1 */}
+        <div
+          className="wizard-step d-flex align-items-center"
+          data-active={step >= 1}
+        >
+          {step > 1 ? <AiFillCheckCircle /> : <RiNumber1 />}
+          <span>寄送地址</span>
+          <div className="wizard-connector" />
+        </div>
+        {/* step2 */}
+        <div
+          className="wizard-step d-flex align-items-center"
+          data-active={step >= 2}
+        >
+          {step > 2 ? <AiFillCheckCircle /> : <RiNumber2 />}
+          <span>運送方式</span>
+          <div className="wizard-connector" />
+        </div>
+        {/* step3 */}
+        <div
+          className="wizard-step d-flex align-items-center"
+          data-active={step === 3}
+        >
+          <RiNumber3 />
+          <span>付款資訊</span>
+          <div className="wizard-connector" />
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
