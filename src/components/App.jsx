@@ -2,14 +2,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.css';
 import './ProgressControl/style.css';
 import { useState } from 'react';
-import { BsArrowRight, BsArrowLeft } from 'react-icons/bs';
 import Header from './Header';
 import StepProgress from './StepProgress';
 import Step1 from './Step1';
 import Step2 from './Step2';
 import Step3 from './Step3';
 import Cart from './Cart';
-// import ProgressControl from './ProgressControl';
+import ProgressControl from './ProgressControl';
 import Footer from './Footer';
 
 const App = () => {
@@ -34,11 +33,11 @@ const App = () => {
       console.log(`Out of ${step}`);
   }
 
-  function clickStep(count) {
+  const clickStep = (count) => {
     if (step < 2 && count === -1) return;
     if (step > 2 && count === 1) return;
     setStep(step + count);
-  }
+  };
 
   return (
     <div className="App">
@@ -70,28 +69,11 @@ const App = () => {
             </section>
             {/* ProgressControl */}
             <section id="progress-control" className="container mt-auto">
-              {/* <ProgressControl /> */}
-              <div className="row">
-                <button
-                  className="btn prev col-xl-3 col-md-4"
-                  data-btnOff={prevBtn}
-                  onClick={() => {
-                    clickStep(-1);
-                  }}
-                >
-                  <BsArrowLeft />
-                  <span className="ms-2">上一步</span>
-                </button>
-                <button
-                  className="btn next col-xl-3 offset-xl-6  col-md-4 offset-md-4"
-                  onClick={() => {
-                    clickStep(1);
-                  }}
-                >
-                  <span className="me-2">{nextBtn}</span>
-                  <BsArrowRight />
-                </button>
-              </div>
+              <ProgressControl
+                prevBtn={prevBtn}
+                nextBtn={nextBtn}
+                clickStep={clickStep}
+              />
             </section>
           </div>
           {/* Cart */}

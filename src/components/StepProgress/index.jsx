@@ -4,11 +4,11 @@ import { RiNumber1, RiNumber2, RiNumber3 } from 'react-icons/ri';
 import { AiFillCheckCircle } from 'react-icons/ai';
 
 // flow.js 定義props型別
-type FunctionalStepProps = {
+type StepProps = {
   step: Number,
 };
 
-const StepProgress: React.FC<FunctionalStepProps> = (props) => {
+const StepProgress: React.FC<StepProps> = (props) => {
   const { step } = props;
   return (
     <>
