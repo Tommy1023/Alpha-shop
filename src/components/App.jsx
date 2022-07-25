@@ -33,10 +33,14 @@ const App = () => {
       console.log(`Out of ${step}`);
   }
 
-  const clickStep = (count) => {
+  type stepChangeProp = {
+    count: number,
+  };
+
+  const stepChange: React.FC<stepChangeProp> = (count) => {
     if (step < 2 && count === -1) return;
     if (step > 2 && count === 1) return;
-    setStep(step + count);
+    setStep((prev) => prev + count);
   };
 
   return (
@@ -72,7 +76,7 @@ const App = () => {
               <ProgressControl
                 prevBtn={prevBtn}
                 nextBtn={nextBtn}
-                clickStep={clickStep}
+                onClickStepBtn={stepChange}
               />
             </section>
           </div>

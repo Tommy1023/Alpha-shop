@@ -4,18 +4,19 @@ import { BsArrowRight, BsArrowLeft } from 'react-icons/bs';
 type ProgressControlProp = {
   prevBtn: boolean,
   nextBtn: string,
-  clickStep: Function,
+  onClickStepBtn: (value: Number) => viod, // 用箭頭函式來定義函式型別(viod:不回傳)
 };
 
 const ProgressControl: React.FC<ProgressControlProp> = (props) => {
-  const { prevBtn, nextBtn, clickStep } = props;
+  const { prevBtn, nextBtn, onClickStepBtn } = props;
+
   return (
     <div className="row">
       <button
         className="btn prev col-xl-3 col-md-4"
-        data-btnOff={prevBtn}
+        data-btn-off={prevBtn}
         onClick={() => {
-          clickStep(-1);
+          onClickStepBtn(-1);
         }}
       >
         <BsArrowLeft />
@@ -24,7 +25,7 @@ const ProgressControl: React.FC<ProgressControlProp> = (props) => {
       <button
         className="btn next col-xl-3 offset-xl-6  col-md-4 offset-md-4"
         onClick={() => {
-          clickStep(1);
+          onClickStepBtn(1);
         }}
       >
         <span className="me-2">{nextBtn}</span>

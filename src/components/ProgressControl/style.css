@@ -9,7 +9,7 @@
   background-color: #F67599;
 }
 
-.btn[data-btnOff=true] {
+.btn[data-btn-off=true] {
   /* display: none; */
   visibility: hidden;
 }

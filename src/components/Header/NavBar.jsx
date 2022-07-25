@@ -10,7 +10,7 @@ const NavBar = () => {
   return (
     <nav className="nav col-5">
       {navLists.map((list) => (
-        <li className="nav-item">
+        <li className="nav-item" key={`${list.item}`}>
           <a className="nav-link p-2" href={list.link}>
             {list.item}
           </a>

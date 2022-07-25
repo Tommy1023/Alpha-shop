@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 const cityLists = [
   '臺北市',
   '新北市',
@@ -24,6 +26,14 @@ const cityLists = [
 ];
 
 const Step1 = () => {
+  const [selectCity, setSelectCity] = useState('');
+  const [userTitle, setUserTitle] = useState('先生');
+  const atCityChange = (e) => {
+    setSelectCity(e.target.value);
+  };
+  const atTitleChange = (e) => {
+    setUserTitle(e.target.value);
+  };
   return (
     <>
       <form action="" method="post">
@@ -38,10 +48,10 @@ const Step1 = () => {
                 id="title"
                 className="form-select"
                 aria-label="title select"
+                value={userTitle}
+                onChange={atTitleChange}
               >
-                <option value="1" selected>
-                  先生
-                </option>
+                <option value="1">先生</option>
                 <option value="2">女士</option>
               </select>
             </div>
@@ -81,10 +91,18 @@ const Step1 = () => {
                 id="city"
                 className="form-select"
                 aria-label="city select"
+                value={selectCity}
+                onChange={atCityChange}
               >
-                <option selected>請選譯縣市</option>
+                <option value="" disabled>
+                  請選譯縣市
+                </option>
                 {cityLists.map((city) => {
-                  return <option value={city}>{city}</option>;
+                  return (
+                    <option value={city} key={city}>
+                      {city}
+                    </option>
+                  );
                 })}
               </select>
             </div>
