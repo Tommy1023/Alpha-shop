@@ -1,7 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './app.css';
-import './ProgressControl/style.css';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
+import style from './app.module.scss';
 import Header from './Header';
 import StepProgress from './StepProgress';
 import Step1 from './Step1';
@@ -11,8 +10,11 @@ import Cart from './Cart';
 import ProgressControl from './ProgressControl';
 import Footer from './Footer';
 
+import data from '../static/data.json';
+
 const App = () => {
   const [step, setStep] = useState(1);
+  const [lineItems, setLineItems] = useState(data);
   let showStep;
   let nextBtn = '下一步';
   let prevBtn = false;
@@ -33,20 +35,23 @@ const App = () => {
       console.log(`Out of ${step}`);
   }
 
-  type stepChangeProp = {
+  type atStepChangeProp = {
     count: number,
   };
 
-  const stepChange: React.FC<stepChangeProp> = (count) => {
-    if (step < 2 && count === -1) return;
-    if (step > 2 && count === 1) return;
-    setStep((prev) => prev + count);
-  };
+  const atStepChange: React.FC<atStepChangeProp> = useCallback(
+    (count) => {
+      if (step < 2 && count === -1) return;
+      if (step > 2 && count === 1) return;
+      setStep((prev) => prev + count);
+    },
+    [step],
+  );
 
   return (
-    <div className="App">
+    <div>
       {/* Header */}
-      <header className="header">
+      <header>
         <div className="container my-2">
           <div className="row d-flex align-items-center p-2">
             <Header />
@@ -55,7 +60,7 @@ const App = () => {
       </header>
 
       {/* StepProgress */}
-      <section className="step-progress my-3">
+      <section className="my-3">
         <div className="container">
           <div className="row pb-2">
             <StepProgress step={step} />
@@ -64,31 +69,29 @@ const App = () => {
       </section>
 
       {/* main */}
-      <div className="main container mb-3">
+      <div className="container mb-3">
         <div className="row">
           <div className="col-7 d-flex align-items-end flex-column">
             {/* step content */}
-            <section id="step-content" className="container mb-2 p-2">
-              {showStep}
-            </section>
+            <section className="container mb-2 p-2">{showStep}</section>
             {/* ProgressControl */}
-            <section id="progress-control" className="container mt-auto">
+            <section className="container mt-auto">
               <ProgressControl
                 prevBtn={prevBtn}
                 nextBtn={nextBtn}
-                onClickStepBtn={stepChange}
+                onClickStepBtn={atStepChange}
               />
             </section>
           </div>
           {/* Cart */}
-          <div id="cart" className="container col-5 d-flex flex-column">
-            <Cart />
+          <div className="container col-5 d-flex flex-column">
+            <Cart lineItems={lineItems} onChangeItem={setLineItems} />
           </div>
         </div>
       </div>
 
       {/* footer */}
-      <footer className="footer">
+      <footer className={style.footer}>
         <div className="container">
           <Footer />
         </div>

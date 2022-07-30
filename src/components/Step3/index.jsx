@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 const Step3 = () => {
   return (
     <>
@@ -56,4 +58,4 @@ const Step3 = () => {
     </>
   );
 };
-export default Step3;
+export default memo(Step3);

@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 const Footer = () => {
   return (
     <div className="d-flex justify-content-center">
@@ -5,4 +7,4 @@ const Footer = () => {
     </div>
   );
 };
-export default Footer;
+export default memo(Footer);

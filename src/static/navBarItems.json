@@ -1,0 +1,7 @@
+[
+  { "item": "男款", "link": "./boy" },
+  { "item": "女款", "link": "./girl" },
+  { "item": "最新消息", "link": "./news" },
+  { "item": "客製商品", "link": "./customization" },
+  { "item": "聯絡我們", "link": "./contact" }
+]

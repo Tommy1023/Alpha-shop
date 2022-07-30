@@ -1,5 +1,7 @@
-import './style.css';
+import { memo } from 'react';
 import { BsArrowRight, BsArrowLeft } from 'react-icons/bs';
+import cx from 'classname';
+import style from './style.module.scss';
 
 type ProgressControlProp = {
   prevBtn: boolean,
@@ -11,10 +13,11 @@ const ProgressControl: React.FC<ProgressControlProp> = (props) => {
   const { prevBtn, nextBtn, onClickStepBtn } = props;
 
   return (
-    <div className="row">
+    <div className={cx(style.stepBtn, 'row')}>
       <button
-        className="btn prev col-xl-3 col-md-4"
-        data-btn-off={prevBtn}
+        className={cx(style.prev, 'btn', 'col-xl-3', 'col-md-4', {
+          'btn-off': prevBtn,
+        })}
         onClick={() => {
           onClickStepBtn(-1);
         }}
@@ -23,7 +26,14 @@ const ProgressControl: React.FC<ProgressControlProp> = (props) => {
         <span className="ms-2">上一步</span>
       </button>
       <button
-        className="btn next col-xl-3 offset-xl-6  col-md-4 offset-md-4"
+        className={cx(
+          style.next,
+          'btn',
+          'col-xl-3',
+          'offset-xl-6',
+          'col-md-4',
+          'offset-md-4',
+        )}
         onClick={() => {
           onClickStepBtn(1);
         }}
@@ -34,4 +44,4 @@ const ProgressControl: React.FC<ProgressControlProp> = (props) => {
     </div>
   );
 };
-export default ProgressControl;
+export default memo(ProgressControl);

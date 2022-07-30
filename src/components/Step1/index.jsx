@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, memo } from 'react';
 
 const cityLists = [
   '臺北市',
@@ -124,4 +124,4 @@ const Step1 = () => {
     </>
   );
 };
-export default Step1;
+export default memo(Step1);
