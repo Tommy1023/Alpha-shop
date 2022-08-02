@@ -6,7 +6,7 @@ import style from './style.module.scss';
 
 type CartProps = {
   lineItems: Array,
-  setLineItems: (Object) => viod,
+  setLineItems: (Object) => void,
 };
 
 const Cart: React.FC<CartProps> = (props) => {

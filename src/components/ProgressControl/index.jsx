@@ -6,7 +6,7 @@ import style from './style.module.scss';
 type ProgressControlProp = {
   prevBtn: boolean,
   nextBtn: string,
-  onClickStepBtn: (value: Number) => viod, // 用箭頭函式來定義函式型別(viod:不回傳)
+  onClickStepBtn: (value: Number) => void, // 用箭頭函式來定義函式型別(void:不回傳)
 };
 
 const ProgressControl: React.FC<ProgressControlProp> = (props) => {
