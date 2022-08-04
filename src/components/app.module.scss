@@ -1,3 +1,15 @@
 .footer {
   background-color: gray;
 }
+
+:global {
+  .cr {
+    outline: 3px solid red
+  }
+  .cb {
+    outline: 3px solid black;
+  }
+  .cy {outline: 3px solid yellow;}
+  .cg {outline: 3px solid green;}
+  .co {outline: 3px solid orange;}
+}

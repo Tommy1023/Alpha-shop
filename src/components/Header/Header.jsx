@@ -2,8 +2,8 @@ import { memo } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import { BsCart3, BsMoon } from 'react-icons/bs';
 import cx from 'classname';
-import style from './style.module.css';
-import navLists from '../../static/navBarItems.json';
+import style from './headerStyle.module.css';
+import navLists from './navBarItems.json';
 
 const Heater = () => {
   return (
