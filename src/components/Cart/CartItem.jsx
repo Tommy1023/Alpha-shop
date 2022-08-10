@@ -1,16 +1,34 @@
-import { memo } from 'react';
+import { memo, useCallback } from 'react';
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
 import { IoTrashOutline } from 'react-icons/io5';
 import cx from 'classname';
 import style from './cartStyle.module.scss';
-import useCartContext from '../CartContext';
+import useCartContext from '../../context/CartContext';
 import type { Product } from '../types';
+import {
+  actionUpdateQuantity,
+  actionRemoveCartItem,
+} from '../../hooks/actions';
 
 type CartItemProps = Product;
 
 const CartItem: React.FC<CartItemProps> = (props) => {
   const { id, img, name, quantity, price } = props;
-  const { atUpdateQuantity, atRemoveCartItem } = useCartContext();
+  const { dispatch } = useCartContext();
+
+  const atUpdateQuantity = useCallback(
+    (ItemId: String, num: Number) => {
+      dispatch(actionUpdateQuantity(ItemId, num));
+    },
+    [dispatch],
+  );
+  const atRemoveCartItem = useCallback(
+    (removeId: Number) => {
+      dispatch(actionRemoveCartItem(removeId));
+    },
+    [dispatch],
+  );
+
   return (
     <div className={cx(style.product, 'row', 'mt-2')}>
       {/* product img */}

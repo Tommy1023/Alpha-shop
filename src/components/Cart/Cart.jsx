@@ -1,19 +1,20 @@
 import { memo } from 'react';
-import useCartContext from '../CartContext';
+import useCartContext from '../../context/CartContext';
 import CartItem from './CartItem';
 
 const Cart = () => {
-  const { step, lineItems, totalAmount, transport } = useCartContext();
+  const { state, step } = useCartContext();
+  const { lineItems, totalAmount, transport } = state;
   const transportMethod = (price: Number) => {
-    console.log('price:', price);
-    if (price === undefined) {
-      return <span>尚未選擇運送方式</span>;
+    if (price === '') {
+      return <span>未選擇運送方式</span>;
     }
     if (price === 0) {
       return <span>免費</span>;
     }
     return <span>{price}</span>;
   };
+
   return (
     <div>
       {/* tittle */}
@@ -50,9 +51,7 @@ const Cart = () => {
       {/* subtotal */}
       <div className="d-flex justify-content-between mb-3">
         <span>商品總額</span>
-        <span>
-          {totalAmount === 0 ? '尚未選購任何商品' : `$${totalAmount}`}
-        </span>
+        <span>{totalAmount === 0 ? '未選購任何商品' : `$${totalAmount}`}</span>
       </div>
     </div>
   );

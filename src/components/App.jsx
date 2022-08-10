@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useCallback, useState, useMemo, useEffect } from 'react';
+import { useCallback, useState, useMemo } from 'react';
 import style from './app.module.scss';
 import Header from './Header/Header';
 import StepProgress from './StepProgress/StepProgress';
@@ -9,80 +9,24 @@ import Step3 from './Step3/Step3';
 import Cart from './Cart/Cart';
 import ProgressControl from './ProgressControl/ProgressControl';
 import Footer from './Footer/Footer';
-
-import data from './data.json';
-import { CartContext } from './CartContext';
+import { CartContext } from '../context/CartContext';
+import useShoppingCart from '../hooks/useShoppingCart';
 
 const App = () => {
   const [step, setStep] = useState(1);
-  /**
-   * @type {[LineItems[], Function]}
-   */
-  const [lineItems, setLineItems] = useState(data);
-  const [totalAmount, setTotalAmount] = useState(0);
-  const [transport, setTransport] = useState('');
-
-  useEffect(() => {
-    const calcTotalAmount = lineItems.reduce((total, currentItem) => {
-      return total + currentItem.price * currentItem.quantity;
-    }, 0);
-    if (transport === '') {
-      setTotalAmount(calcTotalAmount);
-    } else {
-      setTotalAmount(calcTotalAmount + transport.price);
-    }
-  }, [lineItems, transport]);
+  const [state, dispatch] = useShoppingCart();
 
   const atStepChange = useCallback((count: Number) => {
     setStep((prev) => prev + count);
   }, []);
 
-  const atUpdateQuantity = useCallback((id: String, add: Number) => {
-    setLineItems((prev) => {
-      return prev.map((item: Product) => {
-        if (item.id === id) {
-          return {
-            id: item.id,
-            name: item.name,
-            img: item.img,
-            price: item.price,
-            quantity: item.quantity + add,
-          };
-        }
-        return item;
-      });
-    });
-  }, []);
-
-  const atRemoveCartItem = useCallback((id: Number) => {
-    setLineItems((prev) => prev.filter((item) => item.id !== id));
-  }, []);
-
-  const atSelectTransport = useCallback((selectTransport) => {
-    setTransport(selectTransport);
-  }, []);
-
   const providerValue = useMemo(() => {
     return {
+      state,
+      dispatch,
       step,
-      lineItems,
-      setLineItems,
-      atUpdateQuantity,
-      atRemoveCartItem,
-      totalAmount,
-      transport,
-      atSelectTransport,
     };
-  }, [
-    step,
-    lineItems,
-    setLineItems,
-    atUpdateQuantity,
-    atRemoveCartItem,
-    totalAmount,
-    transport,
-    atSelectTransport,
-  ]);
+  }, [state, dispatch, step]);
 
   return (
     <CartContext.Provider value={providerValue}>

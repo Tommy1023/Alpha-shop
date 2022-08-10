@@ -1,11 +1,18 @@
-import { memo } from 'react';
+import { memo, useCallback } from 'react';
 import cx from 'classname';
 import style from './style.module.scss';
-import useCartContext from '../CartContext';
+import useCartContext from '../../context/CartContext';
 import { TRANSPORTS } from './transport';
+import { actionChangTransport } from '../../hooks/actions';
 
 const Step2 = () => {
-  const { atSelectTransport } = useCartContext();
+  const { dispatch } = useCartContext();
+  const atSelectTransport = useCallback(
+    (selectTrans: Object) => {
+      dispatch(actionChangTransport(selectTrans));
+    },
+    [dispatch],
+  );
   return (
     <>
       <form action="" method="post">
@@ -23,10 +30,7 @@ const Step2 = () => {
                         name="flexRadioDefault"
                         id={transport.id}
                         onClick={() => {
-                          atSelectTransport({
-                            trans: transport.trans,
-                            price: transport.price,
-                          });
+                          atSelectTransport(transport);
                         }}
                       />
                       <label

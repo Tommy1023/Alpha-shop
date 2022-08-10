@@ -12,3 +12,9 @@ export type Transport = {
   price: Number,
   workDay: String,
 };
+
+export type State = {
+  lineItems: LineItems[],
+  totalAmount: Number,
+  transport: Object,
+};
